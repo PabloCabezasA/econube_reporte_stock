@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+        <!-- Top menu item -->
+        <menuitem id="menu_stock_report" name="Reportes" parent="stock.menu_stock_root" sequence="50"/>        						
+	    					  				  				
+		<record model="ir.ui.view" id="report_cardex_cardex">
+			<field name="name">cardex.cardex.form</field>
+			<field name="model">cardex.cardex</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Reporte de inventario">
+				    <group	colspan='4'>
+				    	<button name="report_cardex" string="Generar Reporte" type="object" class="oe_highlight"/>
+				    </group>
+				    <group	colspan='4'>
+				    	<field name="csv_file" filename="export_filename"/>					    														
+				    </group>				    
+				    <group>
+				    	<field name="date" required="1" string="Fecha"/>
+				    	<field name="location_id" required="0" string="Ubicacion Stock"/>
+				        <field name="product_ids" required="1"/>				    					    	
+				    </group>
+				</form>
+			</field>
+		</record>
+		
+		<record model="ir.actions.act_window" id="action_cardex">
+			<field name="name">Reporte de inventario</field>
+			<field name="res_model">cardex.cardex</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="report_cardex_cardex"/>
+			<field name="destroy">False</field>
+			<field name="target">new</field>
+		</record>
+
+		<menuitem name="Reporte de inventario" 
+				  id="menu_doc_pendientes" 
+				  parent="menu_stock_report" 
+				  action="action_cardex" 
+				  sequence="10"/>				
+	</data>
+</openerp>
